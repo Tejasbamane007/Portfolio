@@ -1,12 +1,12 @@
 
 import { useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView, Variant } from 'framer-motion';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'none', delay: number = 0) => {
+export const fadeIn = (direction = 'none', delay = 0) => {
   return {
     hidden: {
       y: direction === 'up' ? 40 : direction === 'down' ? -40 : 0,
@@ -27,7 +27,7 @@ export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'n
   };
 };
 
-export const staggerContainer = (staggerChildren?: number, delayChildren?: number) => {
+export const staggerContainer = (staggerChildren: number, delayChildren?: number) => {
   return {
     hidden: {},
     show: {
@@ -39,26 +39,27 @@ export const staggerContainer = (staggerChildren?: number, delayChildren?: numbe
   };
 };
 
-export interface AnimatedSectionProps {
+interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
   once?: boolean;
-  threshold?: number;
 }
 
 export const AnimatedSection = ({ 
   children, 
   className = "", 
   delay = 0, 
-  direction = 'up',
-  once = true,
-  threshold = 0.1
+  direction = 'up', 
+  once = true 
 }: AnimatedSectionProps) => {
   const controls = useAnimation();
   const ref = useRef(null);
-  const inView = useInView(ref, { once, threshold });
+  // Remove threshold as it doesn't exist in the type
+  const inView = useInView(ref, {
+    once
+  });
   
   useEffect(() => {
     if (inView) {
@@ -82,8 +83,8 @@ export const AnimatedSection = ({
 };
 
 export const useGSAPAnimation = (
-  ref: React.RefObject<HTMLElement>,
-  animation: (element: HTMLElement) => gsap.core.Timeline | void,
+  ref: React.RefObject<HTMLElement>, 
+  animation: (element: HTMLElement) => gsap.core.Timeline | undefined, 
   dependencies: any[] = []
 ) => {
   useEffect(() => {
@@ -94,10 +95,21 @@ export const useGSAPAnimation = (
     
     return () => {
       if (tl) tl.kill();
+      
       const triggers = ScrollTrigger.getAll();
-      triggers.forEach(trigger => {
-        if (trigger.vars.trigger === element || trigger.vars.trigger?.contains(element)) {
+      triggers.forEach((trigger) => {
+        // Handle the contains method check more safely
+        if (trigger.vars.trigger === element) {
           trigger.kill(true);
+        } else if (
+          typeof trigger.vars.trigger === 'object' && 
+          trigger.vars.trigger && 
+          'contains' in trigger.vars.trigger &&
+          typeof trigger.vars.trigger.contains === 'function'
+        ) {
+          if (trigger.vars.trigger.contains(element)) {
+            trigger.kill(true);
+          }
         }
       });
     };
