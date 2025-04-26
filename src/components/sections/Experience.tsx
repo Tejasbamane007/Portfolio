@@ -12,7 +12,7 @@ const experiences = [
     company: 'Tech Innovations Inc.',
     role: 'Senior Frontend Developer',
     period: '2022 - Present',
-    description: 'Led the development of the company's flagship product, improving performance by 40%. Managed a team of 5 developers and implemented modern frontend practices.'
+    description: "Led the development of the company's flagship product, improving performance by 40%. Managed a team of 5 developers and implemented modern frontend practices."
   },
   {
     company: 'Creative Solutions',
