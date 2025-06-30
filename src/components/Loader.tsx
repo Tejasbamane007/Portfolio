@@ -45,36 +45,68 @@ const Loader = ({ onComplete }: LoaderProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
-          <motion.div
-            className="mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h1 className="text-4xl font-bold">
-              <span className="text-neon-blue">Dev</span>Studio
-            </h1>
-          </motion.div>
-
-          <motion.div
-            className="w-64 h-1 bg-dark-300 rounded-full overflow-hidden"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
+          <div className="relative">
+            {/* Circular loading animation */}
             <motion.div
-              className="h-full bg-neon-blue"
-              style={{ width: `${progress}%` }}
+              className="w-32 h-32 border-4 border-dark-300 rounded-full"
+              style={{
+                borderTopColor: '#00f0ff',
+                borderRightColor: '#9d4edd',
+              }}
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear"
+              }}
             />
-          </motion.div>
+            
+            {/* Inner circle */}
+            <motion.div
+              className="absolute top-2 left-2 w-24 h-24 border-2 border-dark-200 rounded-full"
+              style={{
+                borderBottomColor: '#06d6a0',
+                borderLeftColor: '#00f0ff',
+              }}
+              animate={{ rotate: -360 }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+
+            {/* TB text in center with blink and glow */}
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center"
+              animate={{
+                textShadow: [
+                  '0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff',
+                  '0 0 5px #9d4edd, 0 0 10px #9d4edd, 0 0 15px #9d4edd',
+                  '0 0 10px #06d6a0, 0 0 20px #06d6a0, 0 0 30px #06d6a0',
+                  '0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 30px #00f0ff'
+                ],
+                opacity: [1, 0.7, 1, 0.8, 1]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <h1 className="text-3xl font-bold text-white">
+                &lt;TB /&gt;
+              </h1>
+            </motion.div>
+          </div>
 
           <motion.div
-            className="mt-4 text-gray-400"
+            className="mt-8 text-gray-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 0.5 }}
           >
-            {progress}%
+            Loading... {progress}%
           </motion.div>
         </motion.div>
       )}

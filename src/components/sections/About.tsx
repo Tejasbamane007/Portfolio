@@ -1,55 +1,37 @@
 
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAPAnimation, AnimatedSection } from '../../utils/animation';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import { AnimatedSection } from '../../utils/animation';
 
 const skills = [
-  { name: 'JavaScript', level: 90 },
-  { name: 'React.js', level: 85 },
-  { name: 'Node.js', level: 80 },
-  { name: 'TypeScript', level: 75 },
-  { name: 'UI/UX Design', level: 70 },
-  { name: 'Three.js', level: 65 },
+  { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+  { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+  { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
+  { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg' },
+  { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+  { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+  { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+  { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+  { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+  { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+  { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg' },
+  { name: 'Vue.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg' },
+  { name: 'Angular', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg' },
+  { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
+  { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg' },
+  { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
+  { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+  { name: 'Go', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg' },
+  { name: 'Rust', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg' },
+  { name: 'Kotlin', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg' }
 ];
 
 const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  
-  useGSAPAnimation(skillsRef, (element) => {
-    const skillBars = element.querySelectorAll('.skill-bar');
-    
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: element,
-        start: 'top 80%',
-        toggleActions: 'play none none none',
-      },
-    });
-    
-    tl.fromTo(
-      skillBars,
-      { width: 0 },
-      {
-        width: (i, target) => {
-          const level = target.getAttribute('data-level');
-          return `${level}%`;
-        },
-        duration: 1.2,
-        ease: 'power3.out',
-        stagger: 0.1,
-      }
-    );
-    
-    return tl;
-  }, []);
-  
   return (
-    <section id="about" ref={sectionRef} className="section-padding bg-dark-100">
+    <section id="about" className="section-padding bg-dark-100">
       <div className="container mx-auto px-4 md:px-6">
         <AnimatedSection className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="heading-lg mb-4">About Me</h2>
@@ -80,25 +62,18 @@ const About = () => {
           <AnimatedSection direction="right" delay={0.4}>
             <div>
               <h3 className="heading-md mb-6 text-white">My Skills</h3>
-              <div ref={skillsRef} className="space-y-6">
+              <div className="grid grid-cols-4 md:grid-cols-6 gap-4">
                 {skills.map((skill, index) => (
-                  <div key={index} className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-gray-400">{skill.level}%</span>
-                    </div>
-                    <div className="h-3 w-full bg-dark-300 rounded-full overflow-hidden">
-                      <div 
-                        className={`skill-bar h-full rounded-full ${
-                          index % 3 === 0 
-                            ? 'bg-neon-blue' 
-                            : index % 3 === 1 
-                              ? 'bg-neon-purple' 
-                              : 'bg-neon-teal'
-                        }`}
-                        data-level={skill.level}
-                      ></div>
-                    </div>
+                  <div 
+                    key={index} 
+                    className="flex flex-col items-center p-3 glass rounded-xl hover:scale-105 transition-transform duration-300 group"
+                  >
+                    <img 
+                      src={skill.icon} 
+                      alt={skill.name} 
+                      className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <span className="text-xs text-gray-300 text-center">{skill.name}</span>
                   </div>
                 ))}
               </div>

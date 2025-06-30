@@ -7,7 +7,7 @@ const navLinks = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' }
 ];
 
@@ -39,7 +39,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-neon-blue">Dev</span>Studio
+            <span className="text-neon-blue">&lt;TB /&gt;</span>
           </motion.a>
           
           {/* Desktop Navigation */}

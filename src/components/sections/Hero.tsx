@@ -104,7 +104,7 @@ const Hero = () => {
             ref={headlineRef}
             className="heading-xl mb-6"
           >
-            {splitText("Hi, I'm Alex. I build beautiful things.")}
+            {splitText("Hi, I'm TB. I build beautiful things.")}
           </h1>
           
           <p 
