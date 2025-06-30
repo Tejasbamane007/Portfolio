@@ -46,31 +46,15 @@ const Loader = ({ onComplete }: LoaderProps) => {
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
           <div className="relative">
-            {/* Circular loading animation */}
+            {/* Single rotating circle */}
             <motion.div
               className="w-32 h-32 border-4 border-dark-300 rounded-full"
               style={{
                 borderTopColor: '#00f0ff',
-                borderRightColor: '#9d4edd',
               }}
               animate={{ rotate: 360 }}
               transition={{
                 duration: 2,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            
-            {/* Inner circle */}
-            <motion.div
-              className="absolute top-2 left-2 w-24 h-24 border-2 border-dark-200 rounded-full"
-              style={{
-                borderBottomColor: '#06d6a0',
-                borderLeftColor: '#00f0ff',
-              }}
-              animate={{ rotate: -360 }}
-              transition={{
-                duration: 1.5,
                 repeat: Infinity,
                 ease: "linear"
               }}
@@ -95,7 +79,7 @@ const Loader = ({ onComplete }: LoaderProps) => {
               }}
             >
               <h1 className="text-3xl font-bold text-white">
-                &lt;TB /&gt;
+                TB
               </h1>
             </motion.div>
           </div>

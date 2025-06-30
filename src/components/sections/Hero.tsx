@@ -2,12 +2,14 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import Typed from 'typed.js';
 import { useGSAPAnimation } from '../../utils/animation';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const typedRef = useRef<HTMLSpanElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAPAnimation(heroRef, (element) => {
@@ -72,6 +74,23 @@ const Hero = () => {
         '-=0.2'
       );
     }
+
+    // Initialize Typed.js
+    if (typedRef.current) {
+      const typed = new Typed(typedRef.current, {
+        strings: ['Fullstack Developer', 'Designer', 'Creative Coder'],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+      });
+
+      return () => {
+        typed.destroy();
+      };
+    }
   }, []);
 
   // Split headline text into spans for animation
@@ -111,7 +130,7 @@ const Hero = () => {
             ref={subtitleRef}
             className="text-xl md:text-2xl text-gray-300 mb-12"
           >
-            <span className="text-neon-blue">Fullstack Developer</span> | <span className="text-neon-purple">Designer</span> | <span className="text-neon-teal">Creative Coder</span>
+            <span ref={typedRef} className="text-neon-blue"></span>
           </p>
           
           <div ref={ctaRef}>

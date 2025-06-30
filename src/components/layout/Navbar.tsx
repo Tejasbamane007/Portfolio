@@ -39,7 +39,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-neon-blue">&lt;TB /&gt;</span>
+            &lt;TB /&gt;
           </motion.a>
           
           {/* Desktop Navigation */}
