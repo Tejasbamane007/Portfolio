@@ -3,32 +3,74 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link, ExternalLink } from 'lucide-react';
 import { AnimatedSection, staggerContainer } from '../../utils/animation';
+import { Description } from '@radix-ui/react-toast';
 
 const projects = [
+  
   {
-    title: 'E-Commerce Platform',
-    description: 'A modern e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, payment processing, and an admin dashboard.',
+    title: 'LearnNova AI Powered Learning Platform',
+    description: 'LearnNova is an AI-powered learning platform that personalizes education through smart content recommendations and interactive features. It enhances student engagement with a user-friendly interface and adaptive learning tools.',
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c', // person coding on laptop
+    tags: ['React', 'Typescript', 'Gsap', 'Tailwind CSS', 'Gemeni API', 'Node.js', 'MongoDB'],
+    githubUrl: 'https://github.com/Tejasbamane007/LearnNova-AI-Powered-Learning-Platform.git'
+  },
+  {
+    title: 'Algorithm Simulation',
+    description: 'An interactive platform with real-time visualizations for search algorithm simulations. Integrated user login and modular content for algorithm learning. Emphasized visual learning with animations and responsive design.',
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c', // developer coding in dark mode
+    tags: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Node.js', 'Gsap'],
+    githubUrl: 'https://github.com/Tejasbamane007/Algorithm-Simulation-Platform.git'
+  },
+  {
+    title: 'DevOps',
+    description: 'The goal of this project is to showcase a complete DevOps workflow, where code is collaboratively developed, continuously integrated, and automatically deployed to a live server with zero manual intervention.',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c', // multiple screens, DevOps setup
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'AWS', 'Docker', 'GitHub-Actions'],
+    githubUrl: 'https://github.com/Tejasbamane007/DevOps'
+  },
+  {
+    title: 'Pest Classification and Recommendation System',
+    description: 'Trained ML model to classify pest species from user inputs. Recommended pest control strategies based on model output. Applied data preprocessing and training using scikit-learn and pandas.',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb', // data scientist working with ML
+    tags: ['Scikit-Learn', 'Pandas'],
+    githubUrl: 'https://github.com/Tejasbamane007/Pest-Classification-and-Recommendation-System.git'
+  },
+  {
+    title: 'ARIA - Advanced AI Assistant',
+    description: 'A futuristic AI assistant with voice recognition, smart chat, music control, file operations, and web navigation. Built using React, Gemini API, and Web Speech API with a cyberpunk UI.',
     image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    liveUrl: '#',
-    githubUrl: '#'
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Gemini API', 'Web Speech API'],
+    githubUrl: 'https://github.com/Tejasbamane007/Aria-AI-Assistant.git'
   },
   {
-    title: 'Task Management App',
-    description: 'A collaborative task management application with real-time updates, drag-and-drop interface, and team collaboration features.',
+    title: 'Basic Calculator',
+    description: 'A simple web-based calculator built using HTML, CSS, and JavaScript that performs basic arithmetic operations like addition, subtraction, multiplication, and division. It features a clean user interface and real-time calculation display.',
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6',
-    tags: ['React', 'Firebase', 'Tailwind CSS', 'Redux'],
-    liveUrl: '#',
-    githubUrl: '#'
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Tejasbamane007/Basic-Calculator'
   },
   {
-    title: 'Portfolio Website',
-    description: 'A creative portfolio website for a photographer showcasing their work with a focus on visual aesthetics and smooth animations.',
+    title: 'Interactive Quiz',
+    description: 'An AI-powered interactive quiz web app that dynamically generates fresh, random questions using the Gemini API. Built with HTML, CSS, and JavaScript, it features a smooth interface with a timer, score tracking, and instant feedback. Every session offers a unique quiz experience, making learning fun and unpredictable.',
+    image: 'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d', // coding in progress
+    tags: ['HTML', 'CSS', 'JavaScript', 'Gemini API'],
+    githubUrl: 'https://github.com/Tejasbamane007/Interactive-Quiz'
+  },
+  {
+    title: 'Expense Tracker',
+    description: 'A simple, responsive expense tracker web app that lets users add, filter, and visualize their income and expenses. It supports CSV/JSON export, monthly reports, and interactive charts for clear financial insights.',
+    image: 'https://images.unsplash.com/photo-1556155092-8707de31f9c4', // laptop with charts and code
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Tejasbamane007/Expense-Tracker'
+  },
+  {
+    title: 'Frontend Chat Application',
+    description: 'This is a frontend-only real-time chat app UI built using HTML, CSS, and JavaScript. It features a sleek, responsive layout with room-based chatting, dark/light themes, and message bubbles — all designed to mimic a modern messaging experience without any backend.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d',
-    tags: ['Next.js', 'GSAP', 'Framer Motion', 'Sanity CMS'],
-    liveUrl: '#',
-    githubUrl: '#'
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    githubUrl: 'https://github.com/Tejasbamane007/Frontend-chat-Application'
   }
+
 ];
 
 const Projects = () => {
@@ -66,7 +108,6 @@ interface ProjectCardProps {
     description: string;
     image: string;
     tags: string[];
-    liveUrl: string;
     githubUrl: string;
   };
   index: number;
@@ -114,16 +155,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </div>
         
         <div className="flex space-x-4">
-          <motion.a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-neon-blue hover:underline"
-            whileHover={{ x: 5 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-          >
-            <ExternalLink size={16} /> View Live
-          </motion.a>
+      
           <motion.a
             href={project.githubUrl}
             target="_blank"

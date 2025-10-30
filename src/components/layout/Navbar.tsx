@@ -39,8 +39,9 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            &lt;TB /&gt;
-          </motion.a>
+<p className="text-2xl font-bold">
+              &lt;<span className="text-neon-blue"> TB </span>/&gt; 
+            </p>          </motion.a>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:block">

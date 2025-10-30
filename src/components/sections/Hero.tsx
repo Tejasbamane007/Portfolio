@@ -1,9 +1,9 @@
-
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import Typed from 'typed.js';
 import { useGSAPAnimation } from '../../utils/animation';
+import { Download } from 'lucide-react';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -102,6 +102,15 @@ const Hero = () => {
     ));
   };
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = '/Tejas%20Bamane_Resume.pdf';
+    link.download = 'Tejas_Bamane_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section id="hero" className="relative h-screen flex items-center overflow-hidden" ref={heroRef}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-dark z-10"></div>
@@ -123,7 +132,7 @@ const Hero = () => {
             ref={headlineRef}
             className="heading-xl mb-6"
           >
-            {splitText("Hi, I'm TB. I build beautiful things.")}
+            {splitText("Hi, I'm Tejas. I build beautiful things.")}
           </h1>
           
           <p 
@@ -133,7 +142,7 @@ const Hero = () => {
             <span ref={typedRef} className="text-neon-blue"></span>
           </p>
           
-          <div ref={ctaRef}>
+          <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <motion.a 
               href="#projects"
               className="btn-primary inline-flex items-center justify-center"
@@ -142,6 +151,16 @@ const Hero = () => {
             >
               View Work
             </motion.a>
+            
+            <motion.button
+              onClick={handleDownloadCV}
+              className="btn-outline inline-flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download size={20} />
+              Download CV
+            </motion.button>
           </div>
         </div>
       </div>

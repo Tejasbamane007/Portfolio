@@ -22,6 +22,8 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 const skills = [
+  { name: 'HTML', icon: Globe, color: '#E34F26' },          
+  { name: 'CSS', icon: Palette, color: '#1572B6' },         
   { name: 'JavaScript', icon: FileCode, color: '#F7DF1E' },
   { name: 'TypeScript', icon: Code, color: '#3178C6' },
   { name: 'React', icon: Globe, color: '#61DAFB' },
@@ -29,17 +31,10 @@ const skills = [
   { name: 'Python', icon: Terminal, color: '#3776AB' },
   { name: 'C', icon: Code, color: '#A8B9CC' },
   { name: 'C++', icon: Code, color: '#00599C' },
-  { name: 'Java', icon: FileCode, color: '#ED8B00' },
   { name: 'MongoDB', icon: Database, color: '#47A248' },
-  { name: 'PostgreSQL', icon: Database, color: '#336791' },
   { name: 'Docker', icon: Layers, color: '#2496ED' },
   { name: 'Git', icon: GitBranch, color: '#F05032' },
-  { name: 'AWS', icon: Settings, color: '#FF9900' },
-  { name: 'React Native', icon: Smartphone, color: '#61DAFB' },
-  { name: 'Vue.js', icon: Globe, color: '#4FC08D' },
-  { name: 'GraphQL', icon: Zap, color: '#E10098' },
-  { name: 'Figma', icon: Palette, color: '#F24E1E' },
-  { name: 'Adobe XD', icon: Palette, color: '#FF61F6' }
+  { name: 'AWS', icon: Settings, color: '#FF9900' }
 ];
 
 const About = () => {
@@ -126,7 +121,7 @@ const About = () => {
                 <div className="w-72 h-72 rounded-full bg-gradient-to-r from-neon-blue via-neon-purple to-neon-teal p-1">
                   <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center">
                     <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" 
+                      src="/p.jpg" 
                       alt="Profile"
                       className="w-64 h-64 rounded-full object-cover"
                     />

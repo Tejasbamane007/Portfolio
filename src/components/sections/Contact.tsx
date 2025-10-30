@@ -6,10 +6,10 @@ import { AnimatedSection } from '../../utils/animation';
 import { useToast } from '@/components/ui/use-toast';
 
 const socialLinks = [
-  { name: 'GitHub', icon: Github, url: 'https://github.com', color: 'bg-gray-800 hover:bg-gray-700' },
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://linkedin.com', color: 'bg-[#0077b5] hover:bg-[#0077b5]/80' },
-  { name: 'Twitter', icon: Twitter, url: 'https://twitter.com', color: 'bg-[#1DA1F2] hover:bg-[#1DA1F2]/80' },
-  { name: 'Email', icon: Mail, url: 'mailto:hello@example.com', color: 'bg-neon-purple hover:bg-neon-purple/80' },
+  { name: 'GitHub', icon: Github, url: 'https://github.com/Tejasbamane007', color: 'bg-gray-800 hover:bg-gray-700' },
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/tejas-bamane-9676b9225/', color: 'bg-[#0077b5] hover:bg-[#0077b5]/80' },
+  { name: 'Twitter', icon: Twitter, url: 'https://x.com/TejasBamane123', color: 'bg-[#1DA1F2] hover:bg-[#1DA1F2]/80' },
+  { name: 'Email', icon: Mail, url: 'https://mail.google.com/mail/?view=cm&fs=1&to=tejasbamane64@gmail.com', color: 'bg-neon-purple hover:bg-neon-purple/80' },
 ];
 
 const Contact = () => {
@@ -29,22 +29,44 @@ const Contact = () => {
     }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/tejasbamane64@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setFormData({ name: '', email: '', message: '' });
-      
+
       toast({
-        title: "Message sent!",
+        title: 'Message sent!',
         description: "Thank you for your message. I'll get back to you soon.",
       });
-    }, 2000);
+    } catch {
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try sending your message again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-  
+
   return (
     <section id="contact" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
@@ -160,7 +182,7 @@ const Contact = () => {
               
               <div className="mt-auto">
                 <h4 className="font-medium text-lg mb-2">Location</h4>
-                <p className="text-gray-400">San Francisco, CA, USA</p>
+                <p className="text-gray-400">Belgaum, Karnataka, India</p>
                 
                 <h4 className="font-medium text-lg mt-6 mb-2">Availability</h4>
                 <p className="text-gray-400">Open to freelance projects and full-time opportunities</p>
